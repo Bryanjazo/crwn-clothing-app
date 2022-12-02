@@ -14,11 +14,8 @@ export default function NavBar() {
           <Link className="nav-link" to="/shop">
             Shop
           </Link>
-          <Link className="nav-link" to="/sign-in">
+          <Link className="nav-link" to="/auth">
             Sign in
-          </Link>
-          <Link className="nav-link" to="/register">
-            Sign UP
           </Link>
         </div>
       </div>
