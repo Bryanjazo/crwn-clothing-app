@@ -39,6 +39,7 @@ export default function NavBar() {
           <Link className="nav-link" to="products">
             Products
           </Link>
+
           <CartIcon />
         </div>
         {isOpen ? <CartDropdown /> : ""}

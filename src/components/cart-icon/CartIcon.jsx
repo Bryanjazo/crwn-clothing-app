@@ -5,7 +5,7 @@ import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 export default function CartIcon() {
-  const { isOpen, setOpen } = useContext(CartContext);
+  const { isOpen, setOpen, itemsInCart } = useContext(CartContext);
   const handleToggle = async (e) => {
     e.preventDefault();
     setOpen(!isOpen);
@@ -13,7 +13,7 @@ export default function CartIcon() {
   return (
     <div className="cart-icon-container">
       <ShoppingIcon className="shopping-icon" onClick={handleToggle} />
-      <span>0</span>
+      <span>{itemsInCart}</span>
     </div>
   );
 }
