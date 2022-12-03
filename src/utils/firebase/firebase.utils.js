@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+
 import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 import {
   getAuth,
@@ -7,6 +8,8 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -41,7 +44,6 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   const userDocRefv = doc(db, "users", userAuth.uid);
 
   const userSnapShot = await getDoc(userDocRefv);
-  console.log(userAuth, "password");
 
   if (!userSnapShot.exists()) {
     const { displayName, email } = userAuth;
@@ -58,7 +60,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
       console.log("There was an error that refrences to: ", err);
     }
   } else {
-    return userSnapShot;
+    return userDocRefv;
   }
 
   //   check of user data exist if it does return user doc ref
@@ -74,3 +76,10 @@ export const createSignInAuth = async (email, password) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutFromFireBase = async () => {
+  await signOut(auth);
+};
+
+export const onAuthStateChangedListener = (callBack) =>
+  onAuthStateChanged(auth, callBack);

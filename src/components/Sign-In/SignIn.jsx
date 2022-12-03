@@ -25,17 +25,14 @@ const SignIn = () => {
   };
 
   const signInWithGoogle = async (e) => {
-    e.preventDefault();
-    console.log("sign in");
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      await createSignInAuth(email, password);
+      const { user } = await createSignInAuth(email, password);
 
       resetFormFields();
     } catch (error) {

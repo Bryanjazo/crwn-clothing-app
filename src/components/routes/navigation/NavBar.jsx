@@ -1,8 +1,16 @@
-import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import "../../styles/navigation/navigation.styles.scss";
 import { ReactComponent as CrwnLogo } from "../../../assets/crown.svg";
+import { useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
+import { signOutFromFireBase } from "../../../utils/firebase/firebase.utils";
 export default function NavBar() {
+  const { currentUser } = useContext(UserContext);
+  console.log(currentUser);
+  const handleSignOut = async (e) => {
+    await signOutFromFireBase();
+  };
+
   return (
     <>
       <div className="navigation">
@@ -14,9 +22,16 @@ export default function NavBar() {
           <Link className="nav-link" to="/shop">
             Shop
           </Link>
-          <Link className="nav-link" to="/auth">
-            Sign in
-          </Link>
+
+          {currentUser ? (
+            <span className="nav-link" onClick={handleSignOut}>
+              Sign Out
+            </span>
+          ) : (
+            <Link className="nav-link" to="/auth">
+              Sign in
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />
