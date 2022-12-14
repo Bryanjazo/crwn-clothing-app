@@ -1,5 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
-import "../../styles/navigation/navigation.styles.scss";
+import { useSelector } from "react-redux";
+import {
+  NavigationContainer,
+  NavLink,
+  NavLinkContainer,
+  LogoContainer,
+} from "../../styles/navigation/navigation.styles";
+
 import { ReactComponent as CrwnLogo } from "../../../assets/crown.svg";
 import { useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
@@ -8,7 +15,8 @@ import CartDropdown from "../../cart-dropdown/CartDropdown";
 import { signOutFromFireBase } from "../../../utils/firebase/firebase.utils";
 import { CartContext } from "../../../context/CartContext";
 export default function NavBar() {
-  const { currentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
+  const { currentUser } = useSelector((state) => state.user);
   const { isOpen } = useContext(CartContext);
 
   const handleSignOut = async (e) => {
@@ -17,33 +25,26 @@ export default function NavBar() {
 
   return (
     <>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <CrwnLogo className="logo">logo</CrwnLogo>
-        </Link>
+        </LogoContainer>
 
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            Shop
-          </Link>
+        <NavLinkContainer>
+          <NavLink to="/shop">Shop</NavLink>
 
           {currentUser ? (
-            <span className="nav-link" onClick={handleSignOut}>
+            <NavLink as="span" onClick={handleSignOut}>
               Sign Out
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="auth">
-              Sign in
-            </Link>
+            <NavLink to="auth">Sign in</NavLink>
           )}
-          <Link className="nav-link" to="products">
-            Products
-          </Link>
 
           <CartIcon />
-        </div>
+        </NavLinkContainer>
         {isOpen ? <CartDropdown /> : ""}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   );
