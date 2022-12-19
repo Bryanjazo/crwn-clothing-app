@@ -5,14 +5,18 @@ import {
   ItemCountContainer,
 } from "../styles/cart-icon/cart-icon.styles.jsx";
 import React from "react";
+import { setIsOpen } from "../../features/basket/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 export default function CartIcon() {
-  const { isOpen, setOpen, itemsInCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const { isOpen, itemsInCart } = useSelector((state) => state.basket);
+
   const handleToggle = async (e) => {
     e.preventDefault();
-    setOpen(!isOpen);
+    dispatch(setIsOpen(!isOpen));
   };
   return (
     <CartIconContainer>

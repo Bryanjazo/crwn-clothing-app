@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router";
 import Home from "./components/routes/home/Home";
 import NavBar from "./components/routes/navigation/NavBar";
@@ -7,7 +7,7 @@ import Shop from "./components/routes/shop/Shop";
 import Authenthication from "./components/routes/authenthication/Authenthication";
 import Register from "./components/register/Register";
 import Checkout from "./components/routes/checkout/Checkout.component";
-import { seCurrentUser } from "./store/user/user.action";
+import { setCurrentUser } from "./features/user/userSlice";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
@@ -19,7 +19,7 @@ const App = () => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
-      dispatch(seCurrentUser(user));
+      dispatch(setCurrentUser(user));
     });
     return unsubscribe;
   }, []);
