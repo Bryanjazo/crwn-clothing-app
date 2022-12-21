@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router";
 import Home from "./components/routes/home/Home";
 import NavBar from "./components/routes/navigation/NavBar";
@@ -8,6 +8,7 @@ import Authenthication from "./components/routes/authenthication/Authenthication
 import Register from "./components/register/Register";
 import Checkout from "./components/routes/checkout/Checkout.component";
 import { setCurrentUser } from "./features/user/userSlice";
+
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
@@ -23,6 +24,7 @@ const App = () => {
     });
     return unsubscribe;
   }, []);
+
   return (
     <Routes>
       <Route path="/" element={<NavBar />}>
