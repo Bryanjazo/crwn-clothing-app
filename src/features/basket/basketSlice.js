@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { addCartItem } from "./basket.actions";
 import { removeCartItems, updateCount } from "./basket.actions";
+
 const initialState = {
   isOpen: false,
   cartItems: [],

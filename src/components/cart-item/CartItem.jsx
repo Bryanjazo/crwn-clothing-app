@@ -6,7 +6,6 @@ import {
   Image,
 } from "../styles/cart-items/cart-items.styles.jsx";
 export default function CartItem({ cartItems }) {
-  console.log(cartItems);
   const { name, imageUrl, price, quantity } = cartItems;
 
   return (

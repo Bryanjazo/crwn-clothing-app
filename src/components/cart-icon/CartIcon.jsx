@@ -7,12 +7,14 @@ import {
 import React from "react";
 import { setIsOpen } from "../../features/basket/basketSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
+import {
+  selectIsCartOpen,
+  selectCartItems,
+} from "../../features/basket/basket.selector.js";
 export default function CartIcon() {
   const dispatch = useDispatch();
-  const { isOpen, itemsInCart } = useSelector((state) => state.basket);
+  const isOpen = useSelector(selectIsCartOpen);
+  const itemsInCart = useSelector(selectCartItems);
 
   const handleToggle = async (e) => {
     e.preventDefault();

@@ -6,13 +6,13 @@ import {
   CartDropDownContainer,
   EmptyMessage,
 } from "../styles/cart-drop-down/cart-drop-down.styles";
-
+import { selectCartItemmsArr } from "../../features/basket/basket.selector";
 import { useSelector } from "react-redux";
 import Button from "../button/Button";
 import CartItem from "../cart-item/CartItem";
 
 export default function CartDropdown() {
-  const { cartItems } = useSelector((state) => state.basket);
+  const cartItems = useSelector(selectCartItemmsArr);
   const navigate = useNavigate();
   const goToCheckoutHandler = () => {
     navigate("/checkout");

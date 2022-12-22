@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 const initialState = {
-  categoriesMap: {},
+  categoriesMap: [],
 };
 
 export const getCategories = createAsyncThunk(
@@ -18,7 +18,7 @@ const categorySlice = createSlice({
   name: "category",
   initialState,
   reducers: {
-    setCategoriesMap: async (state, action) => {
+    setCategoriesMap: (state, action) => {
       state.categoriesMap = action.payload;
     },
   },
@@ -35,3 +35,4 @@ const categorySlice = createSlice({
 export const { setCategoriesMap } = categorySlice.actions;
 
 export default categorySlice.reducer;
+//selectCategories

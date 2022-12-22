@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser } from "../../../features/user/user.selectors";
 import {
   NavigationContainer,
   NavLink,
   NavLinkContainer,
   LogoContainer,
 } from "../../styles/navigation/navigation.styles";
+import { selectIsCartOpen } from "../../../features/basket/basket.selector";
 
 import { ReactComponent as CrwnLogo } from "../../../assets/crown.svg";
 
@@ -14,8 +16,9 @@ import CartDropdown from "../../cart-dropdown/CartDropdown";
 import { signOutFromFireBase } from "../../../utils/firebase/firebase.utils";
 
 export default function NavBar() {
-  const { currentUser } = useSelector((state) => state.user);
-  const { isOpen } = useSelector((state) => state.basket);
+  const currentUser = useSelector(selectCurrentUser);
+
+  const isOpen = useSelector(selectIsCartOpen);
 
   const handleSignOut = async (e) => {
     await signOutFromFireBase();

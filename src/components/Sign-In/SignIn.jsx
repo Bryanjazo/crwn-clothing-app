@@ -5,7 +5,6 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   createSignInAuth,
 } from "../../utils/firebase/firebase.utils";
 

@@ -1,6 +1,5 @@
 import React from "react";
-import { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
+
 import "../styles/checkout/check-out-items.styles.scss";
 
 import {
@@ -11,7 +10,6 @@ import {
 import { useDispatch } from "react-redux";
 export default function CheckoutItems({ cartItem }) {
   const dispatch = useDispatch();
-  const { decrementItems } = useContext(CartContext);
   const { imageUrl, name, price, quantity } = cartItem;
   const clearItemHandler = () => dispatch(decrementItemsFromCart(cartItem));
   const addItemHandler = () => dispatch(addCartItems(cartItem));
